@@ -1,1 +1,4 @@
-# Movie-Mania
+Movie Mania: A responsive webpage showcasing different movies along with its details like title, description and genre along with a thumbnail and background image
+
+This is a part of my react project called Project of Projects. 
+This repo has only Movie Mania code and not the whole project

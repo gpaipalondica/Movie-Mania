@@ -1,101 +1,31 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import '../styles/Movies.css'
+import '../../styles/moviesCss/Movies.css'
+import { AllMovies } from './AllMovies'
+import MovieNavbar from './MovieNavbar'
 
-const MovieList = [
-  {
-    id:1,
-    thumbnail: 'https://i5.walmartimages.com/asr/65e23347-2ccc-4581-9700-581e0ea9c3a8.a808f8889bfa9e368659fbefc5e5dda4.jpeg',
-    bgUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2015/02/avengers_age_of_ultron_poster_detail.jpg?w=1024',
-    title: 'Avengers: End Game',
-    descr: 'Adrift in space with no food or water, Tony Stark sends a message to Pepper Potts as his oxygen supply starts to dwindle. Meanwhile, the remaining Avengers - Thor, Black Widow, Captain America and Bruce Banner - must figure out a way to bring back their vanquished allies for an epic showdown with Thanos - the evil demigod who decimated the planet and the universe.',
-    genre:'Action, Adventure, SciFi',
-  },
-  {
-    id:2,
-    thumbnail: 'https://i.redd.it/hx5uosxtj6l81.jpg',
-    bgUrl: 'https://w0.peakpx.com/wallpaper/307/244/HD-wallpaper-the-batman-movie-poster-art-the-batman-batman-superheroes-movies-2022-movies.jpg',
-    title: 'Batman: Dark Knight Rises',
-    descr: 'With the help of allies Lt. Jim Gordon (Gary Oldman) and DA Harvey Dent (Aaron Eckhart), Batman (Christian Bale) has been able to keep a tight lid on crime in Gotham City. But when a vile young criminal calling himself the Joker (Heath Ledger) suddenly throws the town into chaos, the caped Crusader begins to tread a fine line between heroism and vigilantism.',
-    genre:'Action, Superhero',
-  },
-  {
-    id:3,
-    thumbnail: 'https://www.themoviedb.org/t/p/original/vJ4r8imQ9piseO9ufCwsopBBWnZ.jpg',
-    bgUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2023/05/rev-1-Txtd_Barbie_First_Look_BARBIE_High_Res_JPEG-X-H-2023.jpg?w=1296',
-    title: 'Barbie',
-    descr: 'Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. However, when they get a chance to go to the real world, they soon discover the joys and perils of living among humans.',
-    genre:'Rom-Com',
-  },
-  {
-    id:4,
-    thumbnail: 'https://w0.peakpx.com/wallpaper/429/197/HD-wallpaper-brahmastra-part-one-shiva-brahmastra-2022-fan-brahmastra-part-one-shiva-77764-brahm%C4%81stra.jpg',
-    bgUrl: 'https://i.ytimg.com/vi/bweRG6WueuM/maxresdefault.jpg',
-    title: 'Brahmastra',
-    descr: 'A young man on the brink of falling in love gets his world turned upside down when he discovers he has the power to control fire and a connection to a secret society of guardians.',
-    genre:'Fiction, Sci-Fi',
-  },
-  {
-    id:5,
-    thumbnail: 'https://static.displate.com/280x392/displate/2022-11-02/26944ab7f7627767d8c7279a4333326d_398da8e25789421e929efc74bf8503fb.jpg',
-    bgUrl:'https://wallpaperaccess.com/full/817100.jpg',
-    title: "Harry Potter and the Order of the Phoenix",
-    descr: "It follows Harry Potter's struggles through his fifth year at Hogwarts School of Witchcraft and Wizardry, including the surreptitious return of the antagonist Lord Voldemort, O.W.L. exams, and an obstructive Ministry of Magic.",
-    genre:"Fantasy",
-  },
-  {
-    id:6,
-    thumbnail: 'https://stat4.bollywoodhungama.in/wp-content/uploads/2023/07/Bawaal.jpg',
-    bgUrl:'https://www.filmibeat.com/ph-big/2023/07/bawaal_168993684300.jpg',
-    title: "Bawaal",
-    descr: 'A small-town man who falls in love with the most beautiful girl in town. He wants to marry her one day because marrying her can raise his social position.',
-    genre:"Romance, History"
-  },
-  {
-    id:7,
-    thumbnail: 'https://m.media-amazon.com/images/M/MV5BOTJmNjE0OWYtN2U0NC00YmIzLWE0YWItNGE2MzkyYmI1YjFkXkEyXkFqcGdeQXVyNjc5Mjg4Nzc@._V1_FMjpg_UX1000_.jpg',
-    bgUrl:'https://images-na.ssl-images-amazon.com/images/S/pv-target-images/8f7ad3909f7e5c24f6f9a01cf1b3bafe5ebc16e6ce6d80e25e033bd917f3a024._RI_TTW_.jpg',
-    title: "Singham",
-    descr: 'A brave and honest policeman patiently settles every dispute in his town with his words of wisdom and resorts only to using force when necessary.',
-    genre:"Action, Comedy"
-  },
+import { useNavigate, useParams } from 'react-router-dom'
 
-]
 
 function Movies() {
 
   useEffect(()=>{
     setTimeout(() => {
       document.querySelector('.movie-loader-bg').style.opacity='0'
-    }, 2000)
+    }, 1000)
     setTimeout(() => {
       document.querySelector('.movie-loader-bg').style.display='none'
-    }, 2100)
+    }, 1100)
     
   },[])
 
-  const [mToggler, setMToggler] = useState(false)
-  const [moreInfo, setMoreInfo] = useState(false)
-
-  function movieToggler(){
-    if(mToggler == true){
-      setMToggler(!mToggler)
-      document.querySelector('.mTogglerContent').style.right = '-600px'
-    }
-    else if(mToggler == false){
-      setMToggler(!mToggler)
-      document.querySelector('.mTogglerContent').style.right = '0px'
-    }
-  }
-
-
+  const [moreInfo, setMoreInfo] = useState(false) 
+  
   useEffect(() => {
-
-    // console.log(MovieList);
-    document.querySelector(".fullScreen").style.backgroundImage = 'url('+MovieList[0].bgUrl+')'
-    document.querySelector('.movie-title').innerHTML = MovieList[0].title
-    document.querySelector('.movie-descr').innerHTML = MovieList[0].descr
-    document.querySelector('.movie-genre').innerHTML = 'Genre: '+MovieList[0].genre
+    document.querySelector(".fullScreen").style.backgroundImage = 'url('+AllMovies[0]["Images"][0]+')'
+    document.querySelector('.movie-title').innerHTML = AllMovies[0]["Title"]
+    document.querySelector('.movie-descr').innerHTML = AllMovies[0]["Plot"]
+    document.querySelector('.movie-genre').innerHTML = 'Genre: '+AllMovies[0]["Genre"]
   },[])
 
   function displayMovie(t){
@@ -341,9 +271,7 @@ function Movies() {
  
     window.addEventListener('resize', () => {
 
-        if(/moviemania/.test(document.URL)){
-
-
+        if(/moviemania /.test(document.URL)){
             document.querySelector('.fullScreen').style.cssText += 'transition: unset'
 
           if(window.innerWidth <= 573){
@@ -397,6 +325,21 @@ function Movies() {
   }
 
 
+
+
+const navigateTo = useNavigate()
+
+
+  function showMovie(){
+    let selected = document.querySelector('.movie-item.active').querySelector('.m-title').innerHTML;
+
+    // console.log(modifiedVersion); 
+
+    navigateTo(`/moviemania/${selected}`)
+
+  }
+
+
   return (
     <> 
       <div className="movie-loader-bg">
@@ -407,25 +350,7 @@ function Movies() {
       <div className='movie-content'>
         <div className='fullScreen'></div>
 
-        <div className="movie-navbar">
-          <div className="movie-nav-contents">
-            <a>MovieMania</a>
-            <a href="#">Home</a>
-            <a href="#">Movies</a>
-            <a href="#">TV Shows</a>
-            <a href="#">Browse by Languages</a>
-          </div>
-          <div className="movie-nav-account">
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg>
-            <div className="movie-user">
-              <p>Hello, <span>NewUser</span></p>
-              <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M12,8c-1.178,0-2,0.822-2,2s0.822,2,2,2s2-0.822,2-2S13.178,8,12,8z"></path><path fill="none" d="M12,4c-4.337,0-8,3.663-8,8c0,2.176,0.923,4.182,2.39,5.641c0.757-1.8,2.538-3.068,4.61-3.068h2 c2.072,0,3.854,1.269,4.61,3.068C19.077,16.182,20,14.176,20,12C20,7.663,16.337,4,12,4z M12,14c-2.28,0-4-1.72-4-4s1.72-4,4-4 s4,1.72,4,4S14.28,14,12,14z"></path><path fill="none" d="M13,16.572h-2c-1.432,0-2.629,1.01-2.926,2.354C9.242,19.604,10.584,20,12,20s2.758-0.396,3.926-1.073 C15.629,17.582,14.432,16.572,13,16.572z"></path><path d="M12,2C6.579,2,2,6.579,2,12c0,3.189,1.592,6.078,4,7.924V20h0.102C7.77,21.245,9.813,22,12,22s4.23-0.755,5.898-2H18 v-0.076c2.408-1.846,4-4.734,4-7.924C22,6.579,17.421,2,12,2z M8.074,18.927c0.297-1.345,1.494-2.354,2.926-2.354h2 c1.432,0,2.629,1.01,2.926,2.354C14.758,19.604,13.416,20,12,20S9.242,19.604,8.074,18.927z M17.61,17.641 c-0.757-1.8-2.538-3.068-4.61-3.068h-2c-2.072,0-3.854,1.269-4.61,3.068C4.923,16.182,4,14.176,4,12c0-4.337,3.663-8,8-8 s8,3.663,8,8C20,14.176,19.077,16.182,17.61,17.641z"></path><path d="M12,6c-2.28,0-4,1.72-4,4s1.72,4,4,4s4-1.72,4-4S14.28,6,12,6z M12,12c-1.178,0-2-0.822-2-2s0.822-2,2-2s2,0.822,2,2 S13.178,12,12,12z"></path></svg>
-            </div>
-            <div className='movie-toggler' onClick={movieToggler}>
-            <i className={mToggler ? 'fas fa-times' : 'fas fa-bars'} style={{color:'#fff'}} />
-            </div>
-          </div>
-        </div>
+        <MovieNavbar />
 
         <div className="mTogglerContent">
           <a href="#">Home</a>
@@ -447,28 +372,28 @@ function Movies() {
           </div>
           <p className="movie-genre"></p>
           <div className="movie-play">
-            <button>Watch Now</button>
-            <button onClick={showMoreLess}>{moreInfo ? 'Less Info' : 'More Info'}</button>
+            {/* <button onClick={showMoreLess}>{moreInfo ? 'Read Less' : 'Read More'}</button> */}
+            <button onClick={showMovie}>More Info</button>
           </div>
         </div>
 
 
         <div className="movie-container">
-        <div className="half-container">
-          
-        {MovieList.map((m, key) => {
-          return (
-            <div key={key} id={m.id} className={key === 0? 'movie-item active' : 'movie-item'} onClick={displayMovie}>
-              <img className='thumbnail' src={m.thumbnail} alt="" />
-              <p className='bg-url' style={{display:"none"}}>{m.bgUrl}</p>
-              <p className='m-title'style={{display:"none"}}>{m.title}</p>
-              <p className="m-descr" style={{display:"none"}}>{m.descr}</p>
-              <p className="m-genre" style={{display:"none"}}>Genre: {m.genre}</p>
+          <div className="half-container">
+      
+          {AllMovies.map((m, key) => {
+            return (
+              <div key={key} id={m.id} className={key === 0? 'movie-item active' : 'movie-item'} onClick={displayMovie}>
+                <img className='thumbnail' src={m["Poster"]} alt="" />
+                <p className='bg-url' style={{display:"none"}}>{m["Images"][0]}</p>
+                <p className='m-title'style={{display:"none"}}>{m["Title"]}</p>
+                <p className="m-descr" style={{display:"none"}}>{m["Plot"]}</p>
+                <p className="m-genre" style={{display:"none"}}>Genre: {m["Genre"]}</p>
+              </div>
+            )
+            })}
+                    
             </div>
-          )
-          })}
-                   
-          </div>
         </div>
         </div>
       </>

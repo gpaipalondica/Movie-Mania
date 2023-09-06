@@ -58,7 +58,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.6);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -98,6 +98,59 @@
     color: white;
     cursor: pointer;
 }
+
+.movie-search{
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.6);
+    transition: .5s ease;
+    z-index: 4;
+    padding: 15px 0 20px 0;
+}
+
+.movie-search form{
+    display: flex;
+    gap: 5px;
+    height: 35px;
+    width: 80%;
+}
+
+.movie-search form input{
+    border-radius: 10px 0 0 10px;
+    border: none;
+    width: 80%;
+    font-size: 25px;
+    padding-left: 30px;
+    background-color: white
+}
+
+input {border:0;outline:0;}
+input:focus {outline:none!important;}
+
+.movie-search form button{
+    border-radius: 0 10px 10px 0;
+    font-size: 25px;
+    border: none;
+    width: 20%;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.movie-search form button:hover{
+    background-color:red;
+    color: white;
+}
+
+.movie-search form input::placeholder{
+    font-size: 25px;
+}
+
 
 .movie-user{
     cursor: pointer;
@@ -231,7 +284,8 @@
 }
 
 .movie-play button{
-width: 200px;
+/* width: 200px; */
+width: 100%;
 padding: 10px;
 cursor: pointer;
 font-size: 15px;
